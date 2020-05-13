@@ -133,33 +133,31 @@ public class Main extends JavaPlugin {
 	
 	
     private boolean setupBottles() {
-
-        String version;
+    	
+    	sversion = "N/A";
 
         try {
-            version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+            sversion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
 
-        } catch (ArrayIndexOutOfBoundsException whatVersionAreYouUsingException) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             return false;
         }
-
-        sversion = version; 
         
-        if (version.equals("v1_8_R3"))
+        if (sversion.equals("v1_8_R3"))
             bottle = new Version_1_8_R3(this);
-        if (version.equals("v1_9_R2"))
+        if (sversion.equals("v1_9_R2"))
             bottle = new Version_1_9_R2(this);
-        if (version.equals("v1_10_R1"))
+        if (sversion.equals("v1_10_R1"))
             bottle = new Version_1_10_R1(this);
-        if (version.equals("v1_11_R1"))
+        if (sversion.equals("v1_11_R1"))
             bottle = new Version_1_11_R1(this);
-        if (version.equals("v1_12_R1"))
+        if (sversion.equals("v1_12_R1"))
             bottle = new Version_1_12_R1(this);
-        if (version.equals("v1_13_R2"))
+        if (sversion.equals("v1_13_R2"))
             bottle = new Version_1_13_R2(this);
-        if (version.equals("v1_14_R1"))
+        if (sversion.equals("v1_14_R1"))
             bottle = new Version_1_14_R1(this);
-        if (version.equals("v1_15_R1"))
+        if (sversion.equals("v1_15_R1"))
             bottle = new Version_1_15_R1(this);
 
         return bottle != null;

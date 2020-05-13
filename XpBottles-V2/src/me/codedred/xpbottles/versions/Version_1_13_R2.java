@@ -91,7 +91,7 @@ public class Version_1_13_R2 implements VersionData {
          	 meta.addEnchant(Enchantment.DURABILITY, 0, true);
              meta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS });
 		}
-      //  meta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ATTRIBUTES });
+        meta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ATTRIBUTES });
         item.setItemMeta(meta);
         return item;
 	}

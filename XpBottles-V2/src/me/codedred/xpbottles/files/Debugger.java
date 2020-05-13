@@ -16,7 +16,7 @@ public class Debugger {
 	}
 	public void checkText() {
 		
-		FileConfiguration LANG = plugin.msg.getConfig();
+		FileConfiguration LANG = plugin.getLang();
 		FileConfiguration CONFIG = plugin.getConfig();
 		
 		int total = 0;
