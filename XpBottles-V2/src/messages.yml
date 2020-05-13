@@ -1,0 +1,42 @@
+messages:
+  inventory-is-full: '&cYour inventory is full! Cannot create bottle.'
+  other-players-inventory-is-full: '&c%player%''s inventory is full! Cannot create
+    bottle.'
+  exp-is-zero: '&cYou cannot withdraw 0 exp!'
+  not-enough-exp: '&cYou must have atleast %min% exp to create a bottle!'
+  no-permission: '&cYou do not have permission to do that!'
+  player-not-found: '&cPlayer not found.'
+  incorrect-withdrawal: '&cYou cannot withdraw that.'
+  min-max-error: '&cExp amount must be between &a$%min% &cand &a$%max%&c!'
+  disabled-crafting: '&cThis item cannot be used in a crafting table!'
+  disable-villager-trade: '&cThis item cannot be traded!'
+  admin-bottle-sent: '&cServer sent an exp bottle of &b%exp% to &b%player%&c!'
+  exp-reset: '&cExp was reset!'
+  exp-taken: '&cExp was taken!'
+  exp-given: '&bExp was given!'
+  redeem:
+  - '&9&l+ %exp%'
+  - '&bSuccessfully added exp!'
+  withdraw:
+  - '&c&l- %exp%'
+  - '&4Successfully dropped exp!'
+  withdrawal-item-dropped:
+  - '&c&l- %exp%'
+  - '&cWARNING: &aInventory was full, exp bottle was dropped below you!'
+  given-withdraw:
+  - '&4%signer% sent you an exp bottle of &b&l%exp%!'
+  given-withdrawal-item-dropped:
+  - '&4%signer% sent you an exp bottle of &b&l%exp%!'
+  - '&cWARNING: &aInventory was full, exp bottle was dropped below you!'
+  exp-usage:
+  - '&b&m========&7[&9&lXpBottles&7]&b&m========'
+  - '&d/&7exp withdraw <exp>'
+  - '&d/&7exp withdraw all'
+  - '&d/&7exp withdraw random'
+  - '&d/&7exp withdraw give <exp> <player>'
+  check-exp:
+  - '&6You have &c%exp%&6 exp (&c%levels%&6 levels), you need &c%exp-needed%&6 exp
+    to level up!'
+  check-other-exp:
+  - '&c%player%&6 has &c%exp%&6 exp (&c%levels%&6 levels), %player% needs &c%exp-needed%&6
+    exp to level up!'
