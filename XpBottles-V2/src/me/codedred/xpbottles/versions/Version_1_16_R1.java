@@ -44,7 +44,7 @@ public class Version_1_16_R1 implements VersionData {
 		return false;
 	}
 	
-	
+	// TODO update this?
 	public int getExpAmount(ItemStack item) {
 		net.minecraft.server.v1_16_R1.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
 		NBTTagCompound compound = (nmsItem.hasTag()) ? nmsItem.getTag() : new NBTTagCompound();
