@@ -35,7 +35,12 @@ public class Debugger {
 			plugin.saveConfig();
 			total++;
 		}
-		
+		if (plugin.getServer().getVersion().contains("1.16")) {
+			if (!CONFIG.contains("use-static-uuid")) {
+				CONFIG.set("use-static-uuid.enabled", true);
+			}
+			plugin.saveConfig();
+		}
 		
 		// MESSAGES
 		if (!LANG.contains("messages.inventory-is-full")) {

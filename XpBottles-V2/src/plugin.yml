@@ -2,8 +2,8 @@ name: XpBottles
 main: me.codedred.xpbottles.Main
 # Author set to 'Cmaaxx' for Metric purposes.
 author: Cmaaxx
-authors: [CodedRed, Cmaaxx]
-version: 1.2.2
+authors: [CodedRed]
+version: 1.3.1
 api-version: 1.13
 loadbefore: [Essentials]
 softdepend: [Vault]

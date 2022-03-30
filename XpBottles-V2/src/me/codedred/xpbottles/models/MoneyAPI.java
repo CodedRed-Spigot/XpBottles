@@ -21,4 +21,8 @@ public class MoneyAPI {
         }
         return (eco != null);
     }
+	
+	public boolean isEnabled() {
+		return (eco != null);
+	}
 }

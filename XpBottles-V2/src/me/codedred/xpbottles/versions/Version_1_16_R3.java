@@ -8,7 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.attribute.AttributeModifier.Operation;
-import org.bukkit.craftbukkit.v1_16_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
@@ -17,11 +17,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import me.codedred.xpbottles.Main;
-import net.minecraft.server.v1_16_R1.NBTTagCompound;
+import net.minecraft.server.v1_16_R3.NBTTagCompound;
 
 
 
-public class Version_1_16_R1 implements VersionData {
+public class Version_1_16_R3 implements VersionData {
 
 	private Main plugin;
 	
@@ -30,7 +30,7 @@ public class Version_1_16_R1 implements VersionData {
 	private boolean glow;
 	private UUID uuid;
 	
-	public Version_1_16_R1(Main plugin) {
+	public Version_1_16_R3(Main plugin) {
 		this.plugin = plugin;
 		displayName = plugin.getConfig().getString("bottle.name");
 		lore = plugin.getConfig().getStringList("bottle.lore");
@@ -43,7 +43,7 @@ public class Version_1_16_R1 implements VersionData {
 	
 	
 	public boolean hasValue(ItemStack item) { 
-		net.minecraft.server.v1_16_R1.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
+		net.minecraft.server.v1_16_R3.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
 		if (nmsItem.hasTag())
 			return true;
 		return false;
@@ -51,7 +51,7 @@ public class Version_1_16_R1 implements VersionData {
 	
 	// TODO update this?
 	public int getExpAmount(ItemStack item) {
-		net.minecraft.server.v1_16_R1.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
+		net.minecraft.server.v1_16_R3.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
 		NBTTagCompound compound = (nmsItem.hasTag()) ? nmsItem.getTag() : new NBTTagCompound();
 		return ((NBTTagCompound) compound.getList("AttributeModifiers", 10).get(0)).getInt("Amount");
 	

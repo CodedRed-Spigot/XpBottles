@@ -1,6 +1,7 @@
 package me.codedred.xpbottles;
 
 import java.lang.reflect.Method;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -24,6 +25,7 @@ import me.codedred.xpbottles.listeners.ThrownBottle;
 import me.codedred.xpbottles.listeners.VanillaBottle;
 import me.codedred.xpbottles.models.ExperienceManager;
 import me.codedred.xpbottles.models.MoneyAPI;
+import me.codedred.xpbottles.utils.HexUtil;
 import me.codedred.xpbottles.versions.VersionData;
 import me.codedred.xpbottles.versions.Version_1_10_R1;
 import me.codedred.xpbottles.versions.Version_1_11_R1;
@@ -32,6 +34,9 @@ import me.codedred.xpbottles.versions.Version_1_13_R2;
 import me.codedred.xpbottles.versions.Version_1_14_R1;
 import me.codedred.xpbottles.versions.Version_1_15_R1;
 import me.codedred.xpbottles.versions.Version_1_16_R1;
+import me.codedred.xpbottles.versions.Version_1_16_R2;
+import me.codedred.xpbottles.versions.Version_1_16_R3;
+import me.codedred.xpbottles.versions.Version_1_17_R1;
 import me.codedred.xpbottles.versions.Version_1_8_R3;
 import me.codedred.xpbottles.versions.Version_1_9_R2;
 
@@ -52,6 +57,14 @@ public class Main extends JavaPlugin {
 		Debugger debug = new Debugger(this);
 		debug.checkText();
 		
+		if (this.getServer().getVersion().contains("1.16") || this.getServer().getVersion().contains("1.17")) {
+			if (cfg.getConfig().getBoolean("use-static-uuid.enabled")) {
+				if (!cfg.getConfig().contains("use-static-uuid.do-not-edit-this")) {
+					this.getConfig().set("use-static-uuid.do-not-edit-this", UUID.randomUUID().toString());
+					this.saveConfig();
+				}
+			}
+		}
 		
 		if (!setupBottles()) {
 			getLogger().severe("Failed to setup XpBottles!");
@@ -59,7 +72,7 @@ public class Main extends JavaPlugin {
             getLogger().severe("Server version: " + sversion);
             getLogger().severe("Report this to CodedRed ASAP! Will be fixed within 24hrs!");
             getLogger().severe("Join Discord to report: https://discord.gg/gqwtqX3");
-            getLogger().severe("Compatible versions: 1_8_R3, 1_9_R2, 1_10_R1, 1.11_R1, 1.12_R1, 1.13_R2, 1.14_R1, 1.15_R1, 1.16_R1");
+            getLogger().severe("Compatible versions: 1_8_R3, 1_9_R2, 1_10_R1, 1.11_R1, 1.12_R1, 1.13_R2, 1.14_R1, 1.15_R1, 1.16_R1, 1.16_R2, 1.16_R3, 1.17_R1");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
 		}
@@ -68,10 +81,9 @@ public class Main extends JavaPlugin {
 			this.eco = new MoneyAPI();
 			if (!eco.setupEconomy()) {
 				Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-	            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Disabling XpBottles!");
-	            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "You must have Vault and an Economy plugin installed!");
+	            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "XpBottles could not connect to Vault, disable cost/tax features!");
 	            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-	            Bukkit.getPluginManager().disablePlugin(this);
+	           // Bukkit.getPluginManager().disablePlugin(this);
 	            return;
 			}
 		}
@@ -119,6 +131,8 @@ public class Main extends JavaPlugin {
 	}
 	
 	public String f(String msg) {
+		if (getServer().getVersion().contains("1.16"))
+			msg = HexUtil.hex(msg);
 		return ChatColor.translateAlternateColorCodes('&', msg);
 	}
 	
@@ -162,6 +176,12 @@ public class Main extends JavaPlugin {
             bottle = new Version_1_15_R1(this);
         else if (sversion.equals("v1_16_R1"))
             bottle = new Version_1_16_R1(this);
+        else if (sversion.equals("v1_16_R2"))
+            bottle = new Version_1_16_R2(this);
+        else if (sversion.equals("v1_16_R3"))
+            bottle = new Version_1_16_R3(this);
+        else if (sversion.equals("v1_17_R1"))
+            bottle = new Version_1_17_R1(this);
 
         return bottle != null;
     }
