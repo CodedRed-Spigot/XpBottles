@@ -1,15 +1,5 @@
 package me.codedred.xpbottles;
 
-import java.lang.reflect.Method;
-import java.util.UUID;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
-
 import me.codedred.xpbottles.commands.ExpCommand;
 import me.codedred.xpbottles.commands.XpCommand;
 import me.codedred.xpbottles.commands.tabcompleter.ExpTab;
@@ -27,10 +17,35 @@ import me.codedred.xpbottles.models.ExperienceManager;
 import me.codedred.xpbottles.models.MoneyAPI;
 import me.codedred.xpbottles.utils.HexUtil;
 import me.codedred.xpbottles.versions.VersionData;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.UUID;
 
 public class Main extends JavaPlugin {
 
 	private static final String NMS_CLASS_NAME = "me.codedred.xpbottles.versions.Version_%s";
+	private static final String[] COMPATIBLE_VERSIONS = {
+			"v1_8_R3",
+			"v1_9_R2",
+			"v1_10_R1",
+			"v1_11_R1",
+			"v1_12_R1",
+			"v1_13_R2",
+			"v1_14_R1",
+			"v1_15_R1",
+			"v1_16_R1",
+			"v1_16_R2",
+			"v1_16_R3",
+			"v1_17_R1",
+			"v1_18_R2",
+	};
 
 	public Config cfg;
 	public Messages msg;
@@ -62,7 +77,7 @@ public class Main extends JavaPlugin {
             getLogger().severe("Server version: " + craftBukkitVersion);
             getLogger().severe("Report this to CodedRed ASAP! Will be fixed within 24hrs!");
             getLogger().severe("Join Discord to report: https://discord.gg/gqwtqX3");
-            getLogger().severe("Compatible versions: 1_8_R3, 1_9_R2, 1_10_R1, 1_11_R1, 1_12_R1, 1_13_R2, 1_14_R1, 1_15_R1, 1_16_R1, 1_17_R1, 1_18_R1");
+            getLogger().severe("Compatible versions: " + Arrays.toString(COMPATIBLE_VERSIONS));
             Bukkit.getPluginManager().disablePlugin(this);
             return;
 		}
