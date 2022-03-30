@@ -30,6 +30,7 @@ import java.util.UUID;
 
 public class Main extends JavaPlugin {
 
+	private static final int SPIGOT_PROJECT_ID = 69233;
 	private static final String NMS_CLASS_NAME = "me.codedred.xpbottles.versions.Version_%s";
 	private static final String[] COMPATIBLE_VERSIONS = {
 			"v1_8_R3",
@@ -171,18 +172,17 @@ public class Main extends JavaPlugin {
 	}
 
 	private boolean hasUpdate() {
-		UpdateChecker updater = new UpdateChecker(this, 69233);
+		UpdateChecker updater = new UpdateChecker(this, SPIGOT_PROJECT_ID);
         try {
             if (updater.checkForUpdates()) {
                 getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "You are using an older version of XpBottles!");
-                getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "Download the newest version here:");
-                getServer().getConsoleSender().sendMessage(ChatColor.DARK_AQUA + "https://www.spigotmc.org/resources/xpbottles-convert-exp-into-bottles.69233/");
+                getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "You are using an older version of XpBottles (" + updater.getCurrentVersion() + ")!");
+                getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "Download the newest version (" + updater.getLatestVersion() + ") here:");
+                getServer().getConsoleSender().sendMessage(ChatColor.DARK_AQUA + updater.getResourceURL());
                 getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                 return true;
             } else {
-                getServer().getConsoleSender().sendMessage("[XpBottles] Plugin is up to date! - "
-                				+ getDescription().getVersion());
+                getServer().getConsoleSender().sendMessage("[XpBottles] Plugin is up to date! - " + updater.getCurrentVersion());
                 return false;
             }
         } catch (Exception e) {
