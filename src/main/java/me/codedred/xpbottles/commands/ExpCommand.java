@@ -92,12 +92,20 @@ public class ExpCommand implements CommandExecutor {
 							double cost = 0.0;
 							if (plugin.getConfig().getBoolean("bottle.cost.enabled")) {
 								if (plugin.hasVault()) {
+									if (!plugin.eco.isEnabled()) {
+										player.sendMessage(plugin.f("&4&lXpBottles - &cVault is not installed or connected to XpBottles you must disable cost feature!"));
+										return true;
+									}
 									cost = plugin.getConfig().getDouble("bottle.cost.amount");
 									if (cost > plugin.eco.getEconomy().getBalance(player)) {
 										player.sendMessage(plugin.f(plugin.msg.getConfig().getString("messages.cannot-afford")));
 										return true;
 									}
 									plugin.eco.getEconomy().withdrawPlayer(player, cost);		
+								}
+								else {
+									player.sendMessage(plugin.f("&4&lXpBottles - &cVault is not installed or connected to XpBottles you must disable cost feature!"));
+									return true;
 								}
 							}
 							if (target.getInventory().firstEmpty() == -1 && plugin.getConfig().getBoolean("drop-bottle.enabled") == true) {
@@ -176,12 +184,20 @@ public class ExpCommand implements CommandExecutor {
 							double cost = 0.0;
 							if (plugin.getConfig().getBoolean("bottle.cost.enabled")) {
 								if (plugin.hasVault()) {
+									if (!plugin.eco.isEnabled()) {
+										player.sendMessage(plugin.f("&4&lXpBottles - &cVault is not installed or connected to XpBottles you must disable cost feature!"));
+										return true;
+									}
 									cost = plugin.getConfig().getDouble("bottle.cost.amount");
 									if (cost > plugin.eco.getEconomy().getBalance(player)) {
 										player.sendMessage(plugin.f(plugin.msg.getConfig().getString("messages.cannot-afford")));
 										return true;
 									}
 									plugin.eco.getEconomy().withdrawPlayer(player, cost);		
+								}
+								else {
+									player.sendMessage(plugin.f("&4&lXpBottles - &cVault is not installed or connected to XpBottles you must disable cost feature!"));
+									return true;
 								}
 							}
 							if (player.getInventory().firstEmpty() == -1 && plugin.getConfig().getBoolean("drop-bottle.enabled") == true) {
@@ -251,12 +267,20 @@ public class ExpCommand implements CommandExecutor {
 							double cost = 0.0;
 							if (plugin.getConfig().getBoolean("bottle.cost.enabled")) {
 								if (plugin.hasVault()) {
+									if (!plugin.eco.isEnabled()) {
+										player.sendMessage(plugin.f("&4&lXpBottles - &cVault is not installed or connected to XpBottles you must disable cost feature!"));
+										return true;
+									}
 									cost = plugin.getConfig().getDouble("bottle.cost.amount");
 									if (cost > plugin.eco.getEconomy().getBalance(player)) {
 										player.sendMessage(plugin.f(plugin.msg.getConfig().getString("messages.cannot-afford")));
 										return true;
 									}
 									plugin.eco.getEconomy().withdrawPlayer(player, cost);	
+								}
+								else {
+									player.sendMessage(plugin.f("&4&lXpBottles - &cVault is not installed or connected to XpBottles you must disable cost feature!"));
+									return true;
 								}
 							}
 							if (player.getInventory().firstEmpty() == -1 && plugin.getConfig().getBoolean("drop-bottle.enabled") == true) {
@@ -323,18 +347,26 @@ public class ExpCommand implements CommandExecutor {
 						}
 						//sender.sendMessage(plugin.manager.getTotalExperience(player) + "");
 						if (plugin.manager.getTotalExperience(player) < exp ) {
-							player.sendMessage(plugin.f(plugin.msg.getConfig().getString("messages.not-enough-exp").replace("%min%", Integer.toString(min))));
+							player.sendMessage(plugin.f(plugin.msg.getConfig().getString("messages.incorrect-withdrawal").replace("%min%", Integer.toString(min))));
 							return true;
 						}
 						double cost = 0.0;
 						if (plugin.getConfig().getBoolean("bottle.cost.enabled")) {
 							if (plugin.hasVault()) {
+								if (!plugin.eco.isEnabled()) {
+									player.sendMessage(plugin.f("&4&lXpBottles - &cVault is not installed or connected to XpBottles you must disable cost feature!"));
+									return true;
+								}
 								cost = plugin.getConfig().getDouble("bottle.cost.amount");
 								if (cost > plugin.eco.getEconomy().getBalance(player)) {
 									player.sendMessage(plugin.f(plugin.msg.getConfig().getString("messages.cannot-afford")));
 									return true;
 								}
 								plugin.eco.getEconomy().withdrawPlayer(player, cost);	
+							}
+							else {
+								player.sendMessage(plugin.f("&4&lXpBottles - &cVault is not installed or connected to XpBottles you must disable cost feature!"));
+								return true;
 							}
 						}
 						if (player.getInventory().firstEmpty() == -1 && plugin.getConfig().getBoolean("drop-bottle.enabled") == true) {

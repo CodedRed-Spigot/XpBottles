@@ -38,7 +38,7 @@ public class XpCommand implements CommandExecutor {
 			if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("reload")) {
 					plugin.msg.reloadConfig();
-					plugin.reloadConfig();
+					plugin.cfg.reloadConfig();
 					sender.sendMessage(plugin.f("&9&lConfigs reloaded!"));
 					return true;
 				}

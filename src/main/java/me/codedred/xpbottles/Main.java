@@ -1,6 +1,7 @@
 package me.codedred.xpbottles;
 
 import java.lang.reflect.Method;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -24,6 +25,7 @@ import me.codedred.xpbottles.listeners.ThrownBottle;
 import me.codedred.xpbottles.listeners.VanillaBottle;
 import me.codedred.xpbottles.models.ExperienceManager;
 import me.codedred.xpbottles.models.MoneyAPI;
+import me.codedred.xpbottles.utils.HexUtil;
 import me.codedred.xpbottles.versions.VersionData;
 
 public class Main extends JavaPlugin {
@@ -45,6 +47,14 @@ public class Main extends JavaPlugin {
 		Debugger debug = new Debugger(this);
 		debug.checkText();
 
+		if (this.getServer().getVersion().contains("1.16") || this.getServer().getVersion().contains("1.17")) {
+			if (cfg.getConfig().getBoolean("use-static-uuid.enabled")) {
+				if (!cfg.getConfig().contains("use-static-uuid.do-not-edit-this")) {
+					this.getConfig().set("use-static-uuid.do-not-edit-this", UUID.randomUUID().toString());
+					this.saveConfig();
+				}
+			}
+		}
 
 		if (!setupBottles()) {
 			getLogger().severe("Failed to setup XpBottles!");
@@ -61,10 +71,9 @@ public class Main extends JavaPlugin {
 			this.eco = new MoneyAPI();
 			if (!eco.setupEconomy()) {
 				Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-	            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Disabling XpBottles!");
-	            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "You must have Vault and an Economy plugin installed!");
+	            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "XpBottles could not connect to Vault, disable cost/tax features!");
 	            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-	            Bukkit.getPluginManager().disablePlugin(this);
+	           // Bukkit.getPluginManager().disablePlugin(this);
 	            return;
 			}
 		}
@@ -107,6 +116,8 @@ public class Main extends JavaPlugin {
 	}
 
 	public String f(String msg) {
+		if (getServer().getVersion().contains("1.16"))
+			msg = HexUtil.hex(msg);
 		return ChatColor.translateAlternateColorCodes('&', msg);
 	}
 
