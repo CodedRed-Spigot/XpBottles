@@ -1,24 +1,25 @@
 package me.codedred.xpbottles.files;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import me.codedred.xpbottles.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import me.codedred.xpbottles.Main;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Debugger {
 
-	private Main plugin;
+	private final Main plugin;
+
 	public Debugger(Main instance) {
 		plugin = instance;
 	}
+
 	public void checkText() {
-		
+
 		FileConfiguration LANG = plugin.getLang();
 		FileConfiguration CONFIG = plugin.getConfig();
-		
+
 		int total = 0;
 		// CONFIG
 		if (!CONFIG.contains("bottle.tax")) {
@@ -41,7 +42,7 @@ public class Debugger {
 			}
 			plugin.saveConfig();
 		}
-		
+
 		// MESSAGES
 		if (!LANG.contains("messages.inventory-is-full")) {
 			LANG.set("messages.inventory-is-full", "&cYour inventory is full! Cannot create bottle.");
@@ -192,7 +193,8 @@ public class Debugger {
 		}
 
 		if (total >= 1) {
-			plugin.getServer().getConsoleSender().sendMessage(ChatColor.DARK_AQUA + "[XpBottles] " +  ChatColor.WHITE + "Configs were updated!");
+			plugin.getServer().getConsoleSender().sendMessage(ChatColor.DARK_AQUA + "[XpBottles] " + ChatColor.WHITE + "Configs were updated!");
 		}
 	}
+
 }

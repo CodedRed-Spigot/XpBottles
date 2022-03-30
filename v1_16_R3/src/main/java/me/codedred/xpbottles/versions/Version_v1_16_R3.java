@@ -20,68 +20,68 @@ import java.util.UUID;
 
 public class Version_v1_16_R3 implements VersionData {
 
-    private final Main plugin;
+	private final Main plugin;
 
-    private final String displayName;
-    private final List<String> lore;
-    private final boolean glow;
-    private final UUID uuid;
+	private final String displayName;
+	private final List<String> lore;
+	private final boolean glow;
+	private final UUID uuid;
 
-    public Version_v1_16_R3(Main plugin) {
-        this.plugin = plugin;
-        displayName = plugin.getConfig().getString("bottle.name");
-        lore = plugin.getConfig().getStringList("bottle.lore");
-        glow = plugin.getConfig().getBoolean("bottle.glow");
-        this.uuid = (plugin.getConfig().getBoolean("use-static-uuid.enabled"))
-                ? UUID.fromString(plugin.getConfig().getString("use-static-uuid.do-not-edit-this"))
-                : UUID.randomUUID();
-    }
+	public Version_v1_16_R3(Main plugin) {
+		this.plugin = plugin;
+		displayName = plugin.getConfig().getString("bottle.name");
+		lore = plugin.getConfig().getStringList("bottle.lore");
+		glow = plugin.getConfig().getBoolean("bottle.glow");
+		this.uuid = (plugin.getConfig().getBoolean("use-static-uuid.enabled"))
+			? UUID.fromString(plugin.getConfig().getString("use-static-uuid.do-not-edit-this"))
+			: UUID.randomUUID();
+	}
 
-    public boolean hasValue(ItemStack item) {
-        net.minecraft.server.v1_16_R3.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
-        return nmsItem.hasTag();
-    }
+	public boolean hasValue(ItemStack item) {
+		net.minecraft.server.v1_16_R3.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
+		return nmsItem.hasTag();
+	}
 
-    // TODO update this?
-    public int getExpAmount(ItemStack item) {
-        net.minecraft.server.v1_16_R3.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
-        NBTTagCompound compound = (nmsItem.hasTag()) ? nmsItem.getTag() : new NBTTagCompound();
-        return ((NBTTagCompound) compound.getList("AttributeModifiers", 10).get(0)).getInt("Amount");
-    }
+	// TODO update this?
+	public int getExpAmount(ItemStack item) {
+		net.minecraft.server.v1_16_R3.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
+		NBTTagCompound compound = (nmsItem.hasTag()) ? nmsItem.getTag() : new NBTTagCompound();
+		return ((NBTTagCompound) compound.getList("AttributeModifiers", 10).get(0)).getInt("Amount");
+	}
 
-    public ItemStack getBottle(Player player, int exp) {
-        ItemStack item = getItemStack(player, exp);
-        ItemMeta meta = item.getItemMeta();
+	public ItemStack getBottle(Player player, int exp) {
+		ItemStack item = getItemStack(player, exp);
+		ItemMeta meta = item.getItemMeta();
 
-        AttributeModifier modifier = new AttributeModifier(uuid,
-                "generic.flyingSpeed", exp, Operation.ADD_NUMBER, EquipmentSlot.HAND);
-        meta.addAttributeModifier(Attribute.GENERIC_FLYING_SPEED, modifier);
+		AttributeModifier modifier = new AttributeModifier(uuid,
+			"generic.flyingSpeed", exp, Operation.ADD_NUMBER, EquipmentSlot.HAND);
+		meta.addAttributeModifier(Attribute.GENERIC_FLYING_SPEED, modifier);
 
-        item.setItemMeta(meta);
+		item.setItemMeta(meta);
 
-        return item;
-    }
+		return item;
+	}
 
-    private ItemStack getItemStack(Player player, int exp) {
-        ItemStack item = new ItemStack(Material.getMaterial("EXPERIENCE_BOTTLE"));
-        ItemMeta meta = item.getItemMeta();
+	private ItemStack getItemStack(Player player, int exp) {
+		ItemStack item = new ItemStack(Material.getMaterial("EXPERIENCE_BOTTLE"));
+		ItemMeta meta = item.getItemMeta();
 
-        meta.setDisplayName(plugin.f(displayName.replace("%signer%", player.getName()).replace("%exp%", Integer.toString(exp))));
+		meta.setDisplayName(plugin.f(displayName.replace("%signer%", player.getName()).replace("%exp%", Integer.toString(exp))));
 
-        List<String> updatedLore = new ArrayList<>();
-        for (String l : lore) {
-            updatedLore.add(plugin.f(l.replace("%signer%", player.getName()).replace("%exp%", Integer.toString(exp))));
-        }
+		List<String> updatedLore = new ArrayList<>();
+		for (String l : lore) {
+			updatedLore.add(plugin.f(l.replace("%signer%", player.getName()).replace("%exp%", Integer.toString(exp))));
+		}
 
-        meta.setLore(updatedLore);
+		meta.setLore(updatedLore);
 
-        if (glow) {
-            meta.addEnchant(Enchantment.DURABILITY, 0, true);
-            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        }
-        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        item.setItemMeta(meta);
-        return item;
-    }
+		if (glow) {
+			meta.addEnchant(Enchantment.DURABILITY, 0, true);
+			meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		}
+		meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+		item.setItemMeta(meta);
+		return item;
+	}
 
 }

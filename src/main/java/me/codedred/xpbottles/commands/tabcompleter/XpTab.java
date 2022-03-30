@@ -1,11 +1,11 @@
 package me.codedred.xpbottles.commands.tabcompleter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class XpTab implements TabCompleter {
 
@@ -13,43 +13,45 @@ public class XpTab implements TabCompleter {
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("xp")) {
 
-			
+
 			List<String> finalList = new ArrayList<>();
-			
+
 			if (args.length == 1) {
 				List<String> list = new ArrayList<>();
 				if (sender.hasPermission("xp.admin")) {
-					list.add("give"); list.add("take");
-					list.add("reset"); list.add("create");
+					list.add("give");
+					list.add("take");
+					list.add("reset");
+					list.add("create");
 					list.add("reload");
 				}
-				for (String s : list) 
+				for (String s : list)
 					if (s.startsWith(args[0].toLowerCase()))
 						finalList.add(s);
 				return finalList;
 			}
-			
+
 			if (args.length == 2) {
 				List<String> secondList = new ArrayList<>();
 				if (!args[0].equalsIgnoreCase("reload"))
 					secondList.add("<player>");
-				for (String s : secondList) 
+				for (String s : secondList)
 					if (s.startsWith(args[1].toLowerCase()))
 						finalList.add(s);
 				return finalList;
 			}
-			
+
 			if (args.length == 3) {
 				if (args[0].equalsIgnoreCase("create")) {
 					List<String> thirdList = new ArrayList<>();
 					thirdList.add("<exp>");
-					for (String s : thirdList) 
+					for (String s : thirdList)
 						if (s.startsWith(args[2].toLowerCase()))
 							finalList.add(s);
 					return finalList;
 				}
 			}
-			
+
 		}
 		return null;
 	}

@@ -33,19 +33,19 @@ public class Main extends JavaPlugin {
 	private static final int SPIGOT_PROJECT_ID = 69233;
 	private static final String NMS_CLASS_NAME = "me.codedred.xpbottles.versions.Version_%s";
 	private static final String[] COMPATIBLE_VERSIONS = {
-			"v1_8_R3",
-			"v1_9_R2",
-			"v1_10_R1",
-			"v1_11_R1",
-			"v1_12_R1",
-			"v1_13_R2",
-			"v1_14_R1",
-			"v1_15_R1",
-			"v1_16_R1",
-			"v1_16_R2",
-			"v1_16_R3",
-			"v1_17_R1",
-			"v1_18_R2",
+		"v1_8_R3",
+		"v1_9_R2",
+		"v1_10_R1",
+		"v1_11_R1",
+		"v1_12_R1",
+		"v1_13_R2",
+		"v1_14_R1",
+		"v1_15_R1",
+		"v1_16_R1",
+		"v1_16_R2",
+		"v1_16_R3",
+		"v1_17_R1",
+		"v1_18_R2",
 	};
 
 	public Config cfg;
@@ -74,23 +74,22 @@ public class Main extends JavaPlugin {
 
 		if (!setupBottles()) {
 			getLogger().severe("Failed to setup XpBottles!");
-            getLogger().severe("Your server version is not compatible with this plugin!");
-            getLogger().severe("Server version: " + craftBukkitVersion);
-            getLogger().severe("Report this to CodedRed ASAP! Will be fixed within 24hrs!");
-            getLogger().severe("Join Discord to report: https://discord.gg/gqwtqX3");
-            getLogger().severe("Compatible versions: " + Arrays.toString(COMPATIBLE_VERSIONS));
-            Bukkit.getPluginManager().disablePlugin(this);
-            return;
+			getLogger().severe("Your server version is not compatible with this plugin!");
+			getLogger().severe("Server version: " + craftBukkitVersion);
+			getLogger().severe("Report this to CodedRed ASAP! Will be fixed within 24hrs!");
+			getLogger().severe("Join Discord to report: https://discord.gg/gqwtqX3");
+			getLogger().severe("Compatible versions: " + Arrays.toString(COMPATIBLE_VERSIONS));
+			Bukkit.getPluginManager().disablePlugin(this);
+			return;
 		}
 
 		if (hasVault()) {
 			this.eco = new MoneyAPI();
 			if (!eco.setupEconomy()) {
 				Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-	            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "XpBottles could not connect to Vault, disable cost/tax features!");
-	            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-	           // Bukkit.getPluginManager().disablePlugin(this);
-	            return;
+				Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "XpBottles could not connect to Vault, disable cost/tax features!");
+				Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+				return;
 			}
 		}
 
@@ -101,7 +100,7 @@ public class Main extends JavaPlugin {
 
 		hasUpdate();
 		@SuppressWarnings("unused")
-        Metrics metrics = new Metrics(this);
+		Metrics metrics = new Metrics(this);
 	}
 
 	private void registerEvents() {
@@ -138,24 +137,24 @@ public class Main extends JavaPlugin {
 	}
 
 	public boolean isNewerVersion() {
-		 try {
-	            Class<?> class_Material = Material.class;
-	            Method method = class_Material.getDeclaredMethod("matchMaterial", String.class, Boolean.TYPE);
-	            return (method != null);
-	        } catch(ReflectiveOperationException ex) {
-	        	return false;
-	        }
+		try {
+			Class<?> class_Material = Material.class;
+			Method method = class_Material.getDeclaredMethod("matchMaterial", String.class, Boolean.TYPE);
+			return (method != null);
+		} catch (ReflectiveOperationException ex) {
+			return false;
+		}
 	}
 
 
-    private boolean setupBottles() {
-    	craftBukkitVersion = "N/A";
+	private boolean setupBottles() {
+		craftBukkitVersion = "N/A";
 
-        try {
-            craftBukkitVersion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return false;
-        }
+		try {
+			craftBukkitVersion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return false;
+		}
 
 		try {
 			Class<?> clazz = Class.forName(String.format(NMS_CLASS_NAME, craftBukkitVersion));
@@ -165,7 +164,7 @@ public class Main extends JavaPlugin {
 			getLogger().severe(e.getMessage());
 			return false;
 		}
-    }
+	}
 
 	public boolean hasVault() {
 		return Bukkit.getServer().getPluginManager().getPlugin("Vault") != null;
@@ -173,22 +172,22 @@ public class Main extends JavaPlugin {
 
 	private boolean hasUpdate() {
 		UpdateChecker updater = new UpdateChecker(this, SPIGOT_PROJECT_ID);
-        try {
-            if (updater.checkForUpdates()) {
-                getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "You are using an older version of XpBottles (" + updater.getCurrentVersion() + ")!");
-                getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "Download the newest version (" + updater.getLatestVersion() + ") here:");
-                getServer().getConsoleSender().sendMessage(ChatColor.DARK_AQUA + updater.getResourceURL());
-                getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                return true;
-            } else {
-                getServer().getConsoleSender().sendMessage("[XpBottles] Plugin is up to date! - " + updater.getCurrentVersion());
-                return false;
-            }
-        } catch (Exception e) {
-            getLogger().info("XpBottles Could not check for updates!");
-            return false;
-        }
+		try {
+			if (updater.checkForUpdates()) {
+				getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+				getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "You are using an older version of XpBottles (" + updater.getCurrentVersion() + ")!");
+				getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "Download the newest version (" + updater.getLatestVersion() + ") here:");
+				getServer().getConsoleSender().sendMessage(ChatColor.DARK_AQUA + updater.getResourceURL());
+				getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+				return true;
+			} else {
+				getServer().getConsoleSender().sendMessage("[XpBottles] Plugin is up to date! - " + updater.getCurrentVersion());
+				return false;
+			}
+		} catch (Exception e) {
+			getLogger().info("XpBottles Could not check for updates!");
+			return false;
+		}
 	}
 
 }

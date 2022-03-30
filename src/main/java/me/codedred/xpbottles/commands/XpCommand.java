@@ -1,5 +1,6 @@
 package me.codedred.xpbottles.commands;
 
+import me.codedred.xpbottles.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -7,30 +8,29 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.codedred.xpbottles.Main;
-
 
 public class XpCommand implements CommandExecutor {
 
-	private Main plugin;
+	private final Main plugin;
+
 	public XpCommand(Main plugin) {
 		this.plugin = plugin;
 	}
-	
+
 	private static boolean isNum(String s) {
-	    try {
-	        Integer.parseInt(s);
-	    } catch (NumberFormatException nfe) {
-	        return false;
-	    }
-	    return true;
+		try {
+			Integer.parseInt(s);
+		} catch (NumberFormatException nfe) {
+			return false;
+		}
+		return true;
 	}
-	
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		
+
 		if (label.equalsIgnoreCase("xp")) {
-			
+
 			if (!sender.hasPermission("plugin.manager.admin")) {
 				sender.sendMessage(plugin.f(plugin.msg.getConfig().getString("messages.no-permission")));
 				return true;
@@ -98,7 +98,7 @@ public class XpCommand implements CommandExecutor {
 					int exp = Integer.parseInt(args[2]);
 					if (target.getInventory().firstEmpty() == -1 && plugin.getConfig().getBoolean("drop-bottle.enabled") == true) {
 						target.getWorld().dropItemNaturally(target.getLocation(), plugin.bottle.getBottle(target, exp));
-						 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.msg.getConfig().getString("messages.admin-bottle-sent")).replace("%player%", target.getName()).replace("%exp%", Integer.toString(exp)));
+						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.msg.getConfig().getString("messages.admin-bottle-sent")).replace("%player%", target.getName()).replace("%exp%", Integer.toString(exp)));
 						return true;
 					}
 					target.getInventory().addItem(plugin.bottle.getBottle(target, exp));
@@ -139,7 +139,7 @@ public class XpCommand implements CommandExecutor {
 					}
 					int exp = Integer.parseInt(args[2]);
 					int total = plugin.manager.getTotalExperience(target);
-					plugin.manager.setTotalExperience(target, (total+exp));
+					plugin.manager.setTotalExperience(target, (total + exp));
 					sender.sendMessage(plugin.f(plugin.msg.getConfig().getString("messages.exp-given").replace("%player%", target.getName())));
 					return true;
 				}
@@ -151,7 +151,7 @@ public class XpCommand implements CommandExecutor {
 			sender.sendMessage(plugin.f("&9/&7xp reset <player>"));
 			sender.sendMessage(plugin.f("&9/&7xp reload"));
 			return true;
-			
+
 		}
 		return false;
 	}

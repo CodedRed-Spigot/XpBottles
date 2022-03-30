@@ -2,11 +2,11 @@ name: XpBottles
 main: me.codedred.xpbottles.Main
 # Author set to 'Cmaaxx' for Metric purposes.
 author: Cmaaxx
-authors: [CodedRed, Cmaaxx]
+authors: [ CodedRed, Cmaaxx ]
 version: '${version}'
 api-version: 1.13
-loadbefore: [Essentials]
-softdepend: [Vault]
+loadbefore: [ Essentials ]
+softdepend: [ Vault ]
 
 commands:
   exp:
@@ -15,4 +15,3 @@ commands:
   xp:
     description: Allows you to use admin exp commands!
     usage: /Xp
-
