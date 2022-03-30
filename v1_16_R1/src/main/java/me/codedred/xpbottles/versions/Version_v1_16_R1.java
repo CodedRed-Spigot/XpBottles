@@ -1,73 +1,69 @@
 package me.codedred.xpbottles.versions;
 
 import me.codedred.xpbottles.Main;
-import net.minecraft.server.v1_12_R1.NBTTagByte;
-import net.minecraft.server.v1_12_R1.NBTTagCompound;
-import net.minecraft.server.v1_12_R1.NBTTagInt;
-import net.minecraft.server.v1_12_R1.NBTTagList;
-import net.minecraft.server.v1_12_R1.NBTTagString;
+import net.minecraft.server.v1_16_R1.NBTTagCompound;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_12_R1.inventory.CraftItemStack;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.attribute.AttributeModifier.Operation;
+import org.bukkit.craftbukkit.v1_16_R1.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-public class Version_v1_12_R1 implements VersionData {
+public class Version_v1_16_R1 implements VersionData {
 
     private final Main plugin;
 
     private final String displayName;
     private final List<String> lore;
     private final boolean glow;
+    private final UUID uuid;
 
-    public Version_v1_12_R1(Main plugin) {
+    public Version_v1_16_R1(Main plugin) {
         this.plugin = plugin;
         displayName = plugin.getConfig().getString("bottle.name");
         lore = plugin.getConfig().getStringList("bottle.lore");
         glow = plugin.getConfig().getBoolean("bottle.glow");
+        this.uuid = (plugin.getConfig().getBoolean("use-static-uuid.enabled"))
+                ? UUID.fromString(plugin.getConfig().getString("use-static-uuid.do-not-edit-this"))
+                : UUID.randomUUID();
     }
 
     public boolean hasValue(ItemStack item) {
-        net.minecraft.server.v1_12_R1.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
+        net.minecraft.server.v1_16_R1.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
         return nmsItem.hasTag();
     }
 
+    // TODO update this?
     public int getExpAmount(ItemStack item) {
-        net.minecraft.server.v1_12_R1.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
+        net.minecraft.server.v1_16_R1.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
         NBTTagCompound compound = (nmsItem.hasTag()) ? nmsItem.getTag() : new NBTTagCompound();
-        return compound.getList("AttributeModifiers", 10).get(0).getInt("Amount");
+        return ((NBTTagCompound) compound.getList("AttributeModifiers", 10).get(0)).getInt("Amount");
     }
 
     public ItemStack getBottle(Player player, int exp) {
         ItemStack item = getItemStack(player, exp);
+        ItemMeta meta = item.getItemMeta();
 
-        net.minecraft.server.v1_12_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
-        NBTTagCompound compound = (nmsStack.hasTag()) ? nmsStack.getTag() : new NBTTagCompound();
-        NBTTagList modifiers = new NBTTagList();
-        NBTTagCompound damage = new NBTTagCompound();
-        damage.set("AttributeName", new NBTTagString("generic.flyingSpeed"));
-        damage.set("Name", new NBTTagString("generic.flyingSpeed"));
-        damage.set("Amount", new NBTTagInt(exp));
-        damage.set("Operation", new NBTTagInt(0));
-        damage.set("UUIDLeast", new NBTTagInt(894654));
-        damage.set("UUIDMost", new NBTTagInt(2872));
-        damage.set("Slot", new NBTTagString("mainhand"));
-        modifiers.add(damage);
-        compound.set("AttributeModifiers", modifiers);
-        nmsStack.setTag(compound);
-        item = CraftItemStack.asBukkitCopy(nmsStack);
-        compound.set("Unbreakable", new NBTTagByte((byte) 1));
+        AttributeModifier modifier = new AttributeModifier(uuid,
+                "generic.flyingSpeed", exp, Operation.ADD_NUMBER, EquipmentSlot.HAND);
+        meta.addAttributeModifier(Attribute.GENERIC_FLYING_SPEED, modifier);
+
+        item.setItemMeta(meta);
 
         return item;
     }
 
     private ItemStack getItemStack(Player player, int exp) {
-        ItemStack item = new ItemStack(Material.getMaterial("EXP_BOTTLE"));
+        ItemStack item = new ItemStack(Material.getMaterial("EXPERIENCE_BOTTLE"));
         ItemMeta meta = item.getItemMeta();
 
         meta.setDisplayName(plugin.f(displayName.replace("%signer%", player.getName()).replace("%exp%", Integer.toString(exp))));

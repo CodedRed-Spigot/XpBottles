@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-
 public class Version_v1_16_R3 implements VersionData {
 
     private final Main plugin;
@@ -26,12 +25,16 @@ public class Version_v1_16_R3 implements VersionData {
     private final String displayName;
     private final List<String> lore;
     private final boolean glow;
+    private final UUID uuid;
 
     public Version_v1_16_R3(Main plugin) {
         this.plugin = plugin;
         displayName = plugin.getConfig().getString("bottle.name");
         lore = plugin.getConfig().getStringList("bottle.lore");
         glow = plugin.getConfig().getBoolean("bottle.glow");
+        this.uuid = (plugin.getConfig().getBoolean("use-static-uuid.enabled"))
+                ? UUID.fromString(plugin.getConfig().getString("use-static-uuid.do-not-edit-this"))
+                : UUID.randomUUID();
     }
 
     public boolean hasValue(ItemStack item) {
@@ -50,7 +53,7 @@ public class Version_v1_16_R3 implements VersionData {
         ItemStack item = getItemStack(player, exp);
         ItemMeta meta = item.getItemMeta();
 
-        AttributeModifier modifier = new AttributeModifier(UUID.randomUUID(),
+        AttributeModifier modifier = new AttributeModifier(uuid,
                 "generic.flyingSpeed", exp, Operation.ADD_NUMBER, EquipmentSlot.HAND);
         meta.addAttributeModifier(Attribute.GENERIC_FLYING_SPEED, modifier);
 

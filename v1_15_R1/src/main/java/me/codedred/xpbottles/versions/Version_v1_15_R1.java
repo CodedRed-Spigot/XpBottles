@@ -17,7 +17,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Version_v1_15_R1 implements VersionData {
 
     private final Main plugin;
