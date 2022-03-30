@@ -120,7 +120,9 @@ Adding support for new Spigot versions is very simple. Using the versions that a
 
 <!-- BUILDING -->
 ## Building
-To build the project, run `gradlew build` and the final jar will be in the `build/libs` folder.
+To build the project, you need to firstly run [BuildTools](https://www.spigotmc.org/wiki/buildtools/) for all supported versions.  
+Once finished, they should all be added to your local Maven repo.  
+Then you can run `./gradlew build` and the final jar will be in the `build/libs` folder.
 
 
 
