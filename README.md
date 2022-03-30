@@ -1,9 +1,9 @@
-
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![GNU License][license-shield]][license-url]
+
 
 
 
@@ -32,6 +32,7 @@
 
 
 
+
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
@@ -49,10 +50,12 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#building">Building</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
+
 
 
 
@@ -62,6 +65,9 @@
 XpBottles is the ultimate exp plugin! Create exp bottles, add/take/reset exp from players, and more! 
 The exp amount is saved in a hidden location so you will be able to customize the lore/name of the item to whatever you would like!
 No restrictions.
+
+
+
 
 <!-- GETTING STARTED
 ## Getting Started -->
@@ -80,13 +86,10 @@ _For more examples, please refer to the [Documentation][site-url]_
 
 
 
-
-
 <!-- ROADMAP -->
 ## Roadmap
 
 See the [open issues](https://github.com/CodedRed-Spigot/XpBottles/issues) for a list of proposed features (and known issues).
-
 
 
 
@@ -102,6 +105,23 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AwesomeFeature`)
 5. Open a Pull Request
 
+### New version support
+Adding support for new Spigot versions is very simple. Using the versions that are already there, you should be able to fill in the gaps.
+1. Create a new folder in the root directory with the CraftBukkit package name (e.g `v1_18_R2`).
+2. Create the package path (`src/main/java/me.codedred.xpbottles.versions`).
+3. Create the NMS class. The name should be `Version_<craftbukkit version>` without the `<>`.
+4. Create a new `build.gradle` using other NMS versions as a template and change the spigot dependency version.
+5. Open the `settings.gradle` file and add the new module.
+6. Open `dist/build.gradle` and add the new version to the dependencies list.
+
+
+
+
+<!-- BUILDING -->
+## Building
+To build the project, you need to firstly run [BuildTools](https://www.spigotmc.org/wiki/buildtools/) for all supported versions.  
+Once finished, they should all be added to your local Maven repo.  
+Then you can run `./gradlew build` and the final jar will be in the `build/libs` folder.
 
 
 
@@ -110,7 +130,6 @@ Contributions are what make the open source community such an amazing place to b
 ## License
 
 Distributed under the GNU General Public License v3.0. See `LICENSE` for more information.
-
 
 
 
@@ -124,7 +143,6 @@ CodedRed - [@twitter](https://twitter.com/devcodedred) - devcodedred@gmail.com
 Discord: CodedRed#0900
 
 Project Link: [https://github.com/CodedRed-Spigot/XpBottles](https://github.com/CodedRed-Spigot/XpBottles)
-
 
 
 

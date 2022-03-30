@@ -1,0 +1,65 @@
+#####################################
+#                                   #
+#      XpBottles by: CodedRed       #
+#                                   #
+#####################################
+
+ # Max & Min amount the bottles can hold.
+max-bottle-amount: 1000000
+min-bottle-amount: 50
+
+ #------------------------------------------------#
+ # - name: This is the name of the bottle item.   #
+ # - lore: This is the lore of the bottle item.   #
+ # - glow: This is a true or false statement      #
+ # if true the item will be enchanted.            #
+ #------------------------------------------------#
+bottle:
+  name: "&9&lExpBottle &7(Right Click)"
+  lore:
+    - "&bExp: &f%exp%"
+    - "&bSigner: &f%signer%"
+  glow: true
+  tax:
+    enabled: false
+    percent: 5
+  cost:
+    enabled: false
+    amount: 100
+
+ # When true, it will not allow players to use bottles in a crafting table.
+reject-crafting: true
+
+ # When true, it will not allow players to use bottles when trading to villagers.
+reject-villager-trading: true
+
+ # This is the sound effect when a player uses the withdraw command.
+ # Note: Please use a valid sound effect for the version of minecraft.
+ # Servers Running 1.9 & Above: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html
+ # Servers Running 1.7 or 1.8: http://docs.codelanx.com/Bukkit/1.8/org/bukkit/Sound.html
+ # Servers Running 1.7 or 1.8: Sounds were not tested and may not work! Use at your own risk.
+withdraw-sound:
+  sound: "ENTITY_COW_DEATH"
+  enabled: false
+
+redeem-sound:
+  sound: "ENTITY_LLAMA_CHEST"
+  enabled: false
+
+
+ # This will drop the bottle on the ground next to the player if their inventory is full.
+ # Note: Other players nearby can pick up the bottle!
+drop-bottle:
+  enabled: false
+
+ # Permission based exp bottles are also supported!
+ # Permission node will be xp.<name-of-permission>
+ # For example if the name is 'default' the permission node will be xp.default
+use-perm-based-exp: false
+permission:
+  default:
+    max-bottle-amount: 1000.0
+    min-bottle-amount: 50.0
+  resident:
+    max-bottle-amount: 5000.0
+    min-bottle-amount: 50.0
