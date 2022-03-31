@@ -62,6 +62,7 @@ public class Version_v1_18_R2 implements VersionData {
 		return item;
 	}
 
+	@SuppressWarnings("deprecation")
 	private ItemStack getItemStack(Player player, int exp) {
 		ItemStack item = new ItemStack(Material.getMaterial("EXPERIENCE_BOTTLE"));
 		ItemMeta meta = item.getItemMeta();
