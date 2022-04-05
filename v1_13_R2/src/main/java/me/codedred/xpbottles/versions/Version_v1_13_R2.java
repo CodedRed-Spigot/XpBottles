@@ -34,7 +34,7 @@ public class Version_v1_13_R2 implements VersionData {
 
 	public boolean hasValue(ItemStack item) {
 		net.minecraft.server.v1_13_R2.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
-		return nmsItem.hasTag();
+		return nmsItem.hasTag() && !nmsItem.getTag().getList("AttributeModifiers", 10).isEmpty();
 	}
 
 	public int getExpAmount(ItemStack item) {
