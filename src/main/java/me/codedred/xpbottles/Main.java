@@ -46,6 +46,7 @@ public class Main extends JavaPlugin {
 		"v1_16_R3",
 		"v1_17_R1",
 		"v1_18_R2",
+		"v1_19_R1",
 	};
 
 	public Config cfg;
