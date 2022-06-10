@@ -34,18 +34,4 @@ dependencies {
 
 shadowJar {
     archiveFileName.set("${gradle.rootProject.name}-${gradle.rootProject.version}.jar")
-
-    minimize{
-        exclude(dependency(':.*'))
-    }
 }
-
-task copyJars() {
-    doLast {
-        copy {
-            from("build/libs")
-            into("../build/libs")
-        }
-    }
-}
-shadowJar.finalizedBy(copyJars)
