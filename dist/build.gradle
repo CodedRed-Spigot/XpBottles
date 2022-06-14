@@ -3,12 +3,8 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
-group 'me.codedred'
-version "${gradle.rootProject.version}"
-
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
-compileJava.options.encoding = 'UTF-8'
 
 repositories {
     mavenCentral()
@@ -29,22 +25,9 @@ dependencies {
     implementation project(':v1_16_R3')
     implementation project(':v1_17_R1')
     implementation project(':v1_18_R2')
+    implementation project(':v1_19_R1')
 }
 
 shadowJar {
     archiveFileName.set("${gradle.rootProject.name}-${gradle.rootProject.version}.jar")
-
-    minimize{
-        exclude(dependency(':.*'))
-    }
 }
-
-task copyJars() {
-    doLast {
-        copy {
-            from("build/libs")
-            into("../build/libs")
-        }
-    }
-}
-shadowJar.finalizedBy(copyJars)
