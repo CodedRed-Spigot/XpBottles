@@ -74,14 +74,11 @@ public class Main extends JavaPlugin {
 		}
 
 		if (!setupBottles()) {
-			getLogger().severe("Failed to setup XpBottles!");
-			getLogger().severe("Your server version is not compatible with this plugin!");
+			getLogger().severe("Your server version is not officially compatible with this plugin!");
 			getLogger().severe("Server version: " + craftBukkitVersion);
-			getLogger().severe("Report this to CodedRed ASAP! Will be fixed within 24hrs!");
-			getLogger().severe("Join Discord to report: https://discord.gg/gqwtqX3");
-			getLogger().severe("Compatible versions: " + Arrays.toString(COMPATIBLE_VERSIONS));
-			Bukkit.getPluginManager().disablePlugin(this);
-			return;
+			getLogger().severe("Please report this to https://github.com/CodedRed-Spigot/XpBottles/issues");
+			getLogger().severe("or join our Discord: https://discord.gg/gqwtqX3");
+			getLogger().severe("Officially compatible versions: " + Arrays.toString(COMPATIBLE_VERSIONS));
 		}
 
 		if (hasVault()) {
