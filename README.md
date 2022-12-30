@@ -110,9 +110,9 @@ Adding support for new Spigot versions is very simple. Using the versions that a
 1. Create a new folder in the root directory with the CraftBukkit package name (e.g `v1_18_R2`).
 2. Create the package path (`src/main/java/me.codedred.xpbottles.versions`).
 3. Create the NMS class. The name should be `Version_<craftbukkit version>` without the `<>`.
-4. Create a new `build.gradle` using other NMS versions as a template and change the spigot dependency version.
-5. Open the `settings.gradle` file and add the new module.
-6. Open `dist/build.gradle` and add the new version to the dependencies list.
+4. Create a new `build.gradle.kts` using other NMS versions as a template, and change the Spigot/Paper dependency version. Note that 1.17.1+ and 1.17- are different.
+5. Open the `settings.gradle.kts` file and add the new module.
+6. Open `build.gradle.kts` and add the new version to the dependencies list. Note the `reobf` configuration for 1.17.1+.
 
 
 
