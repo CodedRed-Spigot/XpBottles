@@ -48,6 +48,7 @@ public class Main extends JavaPlugin {
 		"v1_18_R2",
 		"v1_19_R1",
 		"v1_19_R2",
+		"v1_20_R1"
 	};
 
 	public Config cfg;
@@ -100,7 +101,8 @@ public class Main extends JavaPlugin {
 		registerEvents();
 		registerCommands();
 
-		hasUpdate();
+		// Don't use this for now.
+		//hasUpdate();
 		@SuppressWarnings("unused")
 		Metrics metrics = new Metrics(this);
 	}
