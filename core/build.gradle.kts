@@ -10,7 +10,7 @@ repositories {
 
 dependencies {
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
-    compileOnly("org.spigotmc:spigot-api:1.19.3-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT")
 }
 
 tasks {

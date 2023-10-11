@@ -1,7 +1,8 @@
 plugins {
     id("java")
+
+    id("com.rikonardo.papermake") version "1.0.6"
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("com.rikonardo.papermake") version "1.0.5"
 }
 
 allprojects {
@@ -26,6 +27,7 @@ dependencies {
     implementation(project(":v1_18_R2", "reobf"))
     implementation(project(":v1_19_R1", "reobf"))
     implementation(project(":v1_19_R2", "reobf"))
+    implementation(project(":v1_19_R3", "reobf"))
 }
 
 tasks {
