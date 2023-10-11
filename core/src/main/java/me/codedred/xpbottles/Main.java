@@ -16,6 +16,7 @@ import me.codedred.xpbottles.listeners.VanillaBottle;
 import me.codedred.xpbottles.models.ExperienceManager;
 import me.codedred.xpbottles.models.MoneyAPI;
 import me.codedred.xpbottles.utils.HexUtil;
+import me.codedred.xpbottles.utils.ServerUtil;
 import me.codedred.xpbottles.versions.VersionData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -49,6 +50,8 @@ public class Main extends JavaPlugin {
 		"v1_19_R1",
 		"v1_19_R2",
 		"v1_19_R3",
+		"v1_20_R1",
+		"v1_20_R2"
 	};
 
 	public Config cfg;
@@ -66,7 +69,7 @@ public class Main extends JavaPlugin {
 		Debugger debug = new Debugger(this);
 		debug.checkText();
 
-		if (this.getServer().getVersion().contains("1.16") || this.getServer().getVersion().contains("1.17")) {
+		if (ServerUtil.isRisenVersion()) {
 			if (cfg.getConfig().getBoolean("use-static-uuid.enabled")) {
 				if (!cfg.getConfig().contains("use-static-uuid.do-not-edit-this")) {
 					this.getConfig().set("use-static-uuid.do-not-edit-this", UUID.randomUUID().toString());
@@ -134,7 +137,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public String f(String msg) {
-		if (getServer().getVersion().contains("1.16"))
+		if (ServerUtil.isRisenVersion())
 			msg = HexUtil.hex(msg);
 		return ChatColor.translateAlternateColorCodes('&', msg);
 	}
